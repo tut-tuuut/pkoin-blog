@@ -1,0 +1,55 @@
+@import url("//fonts.googleapis.com/css?family=Josefin+Sans:300,400,700");
+
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+
+body {
+  line-height: 1.4;
+  font: 18px/28px "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: black;
+}
+
+blockquote {
+  background: $background_quote_color;
+  border-left: $border_quote;
+  margin: 15px 0;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+
+  &:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+  }
+
+  p {
+    display: inline;
+  }
+}

@@ -1,0 +1,48 @@
+@media only screen and (max-width: 480px) {
+
+  .header-container {
+    .sub-title {
+      display: none;
+    }
+  }
+
+  .footer-container {
+    ul li a span {
+      display: none;
+    }
+  }
+
+}
+
+@media only screen and (min-width: 768px) {
+
+  .header-container {
+    -webkit-box-shadow: 0 5px 10px #aaa;
+       -moz-box-shadow: 0 5px 10px #aaa;
+            box-shadow: 0 5px 10px #aaa;
+
+    line-height: 1em;
+    font-size: 2.5em;
+
+    .sub-title {
+      font-size: 0.5em;
+    }
+  }
+
+  .footer-container {
+    font-size: 1.2em;
+  }
+
+}
+
+@media only screen and (min-width: 1140px) {
+
+  /**
+   * Maximal Width
+   */
+  .wrapper {
+    width: 1026px; /* 1140px - 10% for margins */
+    margin: 0 auto;
+  }
+
+}
