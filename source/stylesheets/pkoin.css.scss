@@ -1,0 +1,6 @@
+$main_color: #139EA8;
+$header_bg_color: #3F3F3F;
+$bottom_link_color: $header_bg_color;
+$border_quote: 7px solid $main_color;
+$background_quote_color: lighten($header_bg_color, 70%);
+$border_img: 1px solid lighten($header_bg_color, 50%);
