@@ -1,0 +1,352 @@
+---
+title: docker
+date: 2013-12-19 10:08 UTC
+tags: docker, virtualisation, sysadmin
+---
+
+J'utilise actuellement [VirtualBox](https://www.virtualbox.org/) et (l'indispensable) [Vagrant](http://www.vagrantup.com/) pour virtualiser mes différents environnements. Fin 2013, je pense qu'il n'est plus nécessaire de présenter ces deux formidables outils. Très simple à installer, à configurer et à utiliser, ce type de virtualisation a deux problèmes majeurs : c'est lent et ça consomme beaucoup de RAM (bien entendu, cela dépend du nombre de VMs et comment elles sont configurées). J'ai donc cherché une alternative et découvert [Docker](http://www.docker.io/).
+
+Qu'est-ce que Docker ? Docker.io répond,
+
+> Docker est un projet open-source qui permet de créer facilement des conteneurs légers, portables, auto-suffisants pour n'importe quelle application. Le même conteneur, créé et testé par un développeur sur son ordinateur portable, peut être utilisé : en production, sur des VMs, directement sur une machine sans système d'exploitation, des clusters OpenStack, des clouds publics, ...
+> 
+> [docker.io](http://www.docker.io/)
+
+![Docker](images/docker/logo.png)
+
+Docker est un outil qui va permettre de gérer des conteneurs LXC.
+
+<i class="fa fa-lightbulb-o"></i> Pour ceux qui ne savent pas ce que sont les conteneurs LXC, imaginez de petits systèmes d'exploitation dans votre système hôte. C'est ce que permet déjà de faire VMWare et VirtualBox me direz-vous. Mise à part que ces derniers virtualisent la machine complète. Le principe ici est d'isoler uniquement les environnements d'exécution (Processeur, mémoire, réseau, système de fichier, ...). Les conteneurs partagent le même noyau. Cela explique le fait que LXC soit aussi connu sous le nom "chroot on steroids". On parle de virtualisation légère.
+
+<i class="fa fa-apple"></i> Pour ceux qui sont sous Mac OSX, pas de chance, LXC n'est pas supporté. Il va falloir créer une VM sous Linux qui hébergera Docker ainsi que les conteneurs LXC. C'est assez simple mais bon, c'est dommage. Docker vous facilite la vie et met à disposition, sur [son dépôt Github](https://github.com/dotcloud/docker), un Vagrantfile pour monter cette VM.
+
+Autre point non négligeable, là où VirtualBox aura besoin de 50Go pour faire tourner 5 VMs de 10Go, Docker utilisera uniquement l'espace disque nécessaire directement sur la machine hôte pour faire tourner ses 5 conteneurs. Cela est possible car les conteneurs se basent sur un système de fichier qui permet de fusionner plusieurs points de montage, [Aufs](http://fr.wikipedia.org/wiki/Aufs). Globalement, les conteneurs se partagent les mêmes trucs de base.
+
+Il est important de noter que Docker ne démarre pas un conteneur. Il demande au conteneur d'exécuter des commandes et lorsque le conteneur a fini de faire ce qu'on lui a demandé, il s'éteint, contrairement à une VM qui reste allumé et consomme de la RAM.
+
+La philosophie de Docker est donc de monter un conteneur par service. Par exemple, si vous avez besoin d'un serveur MySQL, d'un serveur Apache, d'un serveur Varnish, vous utiliserez alors trois conteneurs.
+
+Sur docker.io, vous parviendrez rapidement à faire tourner un conteneur qui affiche 'hello world'. Ici, on va plutôt créer une image permettant de lancer un conteneur avec Percona 5.6 et vérifier depuis la machine hôte qu'on puisse bien s'y connecter et lancer des requêtes. Pour cela, on va devoir expliquer à Docker comment construire cette image et quoi y mettre dedans. C'est le rôle d'un [Dockerfile](http://docs.docker.io/en/latest/use/builder/).
+
+Bref, créons cette fameuse image grâce au Dockerfile suivant,
+
+```
+# Mon superbe serveur Percona 5.6
+#
+# VERSION 0.1
+
+# Notre image de base est une Debian Squeeze standard
+FROM tianon/debian:squeeze
+
+# On ajoute le repo Percona
+RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+RUN echo "deb http://repo.percona.com/apt squeeze main" >> /etc/apt/sources.list.d/percona.list
+RUN echo "deb-src http://repo.percona.com/apt squeeze main" >> /etc/apt/sources.list.d/percona.list
+RUN apt-get update
+
+# On installe le serveur Percona
+RUN apt-get install -y percona-server-server-5.6
+
+# On autorise la connexion à l'utilisateur "root" avec le mot de passe "root"
+RUN /usr/bin/mysqld_safe & \
+sleep 3s && \
+echo "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY \"root\" WITH GRANT OPTION;" | mysql
+
+# On ouvre le port par défaut du serveur Percona
+EXPOSE 3306
+
+# Et enfin, on démarre le serveur Percona
+ENTRYPOINT ["usr/bin/mysqld_safe"]
+```
+
+<i class="fa fa-lightbulb-o"></i> Les instructions [FROM](http://docs.docker.io/en/latest/use/builder/#from), [RUN](http://docs.docker.io/en/latest/use/builder/#run) et [EXPOSE](http://docs.docker.io/en/latest/use/builder/#expose) sont assez simple à comprendre. Par contre, la différence entre les instructions RUN et [ENTRYPOINT](http://docs.docker.io/en/latest/use/builder/#entrypoint) est moins évidente. RUN permet d'exécuter une commande et de commiter le résultat. ENTRYPOINT permet de lancer une commande à chaque fois que le conteneur sera démarré. Cela permet de transformer facilement un conteneur en exécutable. Il ne peut y avoir qu'une seule instruction ENTRYPOINT par Dockerfile et la commande exécutée ne pourra pas être surchargée. Si vous avez besoin de surcharger cette commande, utilisez plutôt l'instruction [CMD](http://docs.docker.io/en/latest/use/builder/#cmd).
+
+Lançons la création,
+
+```sh
+$ docker build -t pkoin/percona-server .
+Uploading context  64.2 MB
+Step 1 : FROM tianon/debian:squeeze
+ ---> 05b866649fa8
+Step 2 : RUN apt-key adv --keyserver keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+ ---> Using cache
+ ---> 4d3a732f9e14
+Step 3 : RUN echo "deb http://repo.percona.com/apt squeeze main" >> /etc/apt/sources.list.d/percona.list
+ ---> Using cache
+ ---> 3532869348e2
+Step 4 : RUN echo "deb-src http://repo.percona.com/apt squeeze main" >> /etc/apt/sources.list.d/percona.list
+ ---> Using cache
+ ---> a5b79c308d73
+Step 5 : RUN apt-get update
+ ---> Running in bccbd74c22c9
+Get:1 http://security.debian.org squeeze/updates Release.gpg [836 B]
+Get:2 http://security.debian.org squeeze/updates Release [86.9 kB]
+Get:3 http://repo.percona.com squeeze Release.gpg [198 B]
+Get:4 http://ftp.us.debian.org squeeze Release.gpg [1672 B]
+Get:5 http://ftp.us.debian.org squeeze-updates Release.gpg [836 B]
+Hit http://ftp.us.debian.org squeeze Release
+Get:6 http://security.debian.org squeeze/updates/main amd64 Packages [429 kB]
+Get:7 http://ftp.us.debian.org squeeze-updates Release [113 kB]
+Hit http://ftp.us.debian.org squeeze/main amd64 Packages
+Get:8 http://ftp.us.debian.org squeeze-updates/main amd64 Packages [4959 B]
+Get:9 http://repo.percona.com squeeze Release [7675 B]
+Get:10 http://repo.percona.com squeeze/main Sources [4348 B]
+Get:11 http://repo.percona.com squeeze/main amd64 Packages [12.3 kB]
+Fetched 662 kB in 7s (85.3 kB/s)
+
+ ---> 016f1f06ea78
+Step 6 : RUN apt-get install -y percona-server-server-5.6
+ ---> Running in 4ea3bf2264ec
+
+
+The following extra packages will be installed:
+  adduser ifupdown libaio1 libdb4.7 libdbd-mysql-perl libdbi-perl libgdbm3
+  libmysqlclient16 libmysqlclient18.1 libnet-daemon-perl libplrpc-perl
+  net-tools netbase percona-server-client-5.6 percona-server-common-5.6 perl
+  perl-modules psmisc
+Suggested packages:
+  dhcp3-client dhcp-client ppp libcompress-zlib-perl tinyca perl-doc
+  libterm-readline-gnu-perl libterm-readline-perl-perl make
+The following NEW packages will be installed:
+  adduser ifupdown libaio1 libdb4.7 libdbd-mysql-perl libdbi-perl libgdbm3
+  libmysqlclient16 libmysqlclient18.1 libnet-daemon-perl libplrpc-perl
+  net-tools netbase percona-server-client-5.6 percona-server-common-5.6
+  percona-server-server-5.6 perl perl-modules psmisc
+0 upgraded, 19 newly installed, 0 to remove and 2 not upgraded.
+Need to get 50.2 MB of archives.
+After this operation, 179 MB of additional disk space will be used.
+Get:1 http://repo.percona.com/apt/ squeeze/main libmysqlclient16 amd64 5.1.72-rel14.10-597.squeeze [1467 kB]
+Get:2 http://ftp.us.debian.org/debian/ squeeze/main adduser all 3.112+nmu2 [250 kB]
+Get:3 http://ftp.us.debian.org/debian/ squeeze/main net-tools amd64 1.60-23 [337 kB]
+Get:4 http://ftp.us.debian.org/debian/ squeeze/main ifupdown amd64 0.6.10 [49.4 kB]
+Get:5 http://ftp.us.debian.org/debian/ squeeze/main libgdbm3 amd64 1.8.3-9 [46.2 kB]
+Get:6 http://ftp.us.debian.org/debian/ squeeze/main netbase all 4.45 [20.7 kB]
+Get:7 http://ftp.us.debian.org/debian/ squeeze/main libdb4.7 amd64 4.7.25-9 [662 kB]
+Get:8 http://ftp.us.debian.org/debian/ squeeze/main perl-modules all 5.10.1-17squeeze6 [3482 kB]
+Get:9 http://repo.percona.com/apt/ squeeze/main libmysqlclient18.1 amd64 5.6.15-rel63.0-519.squeeze [943 kB]
+Get:10 http://ftp.us.debian.org/debian/ squeeze/main perl amd64 5.10.1-17squeeze6 [4462 kB]
+Get:11 http://repo.percona.com/apt/ squeeze/main percona-server-common-5.6 amd64 5.6.15-rel63.0-519.squeeze [3210 B]
+Get:12 http://repo.percona.com/apt/ squeeze/main percona-server-client-5.6 amd64 5.6.15-rel63.0-519.squeeze [10.2 MB]
+Get:13 http://ftp.us.debian.org/debian/ squeeze/main libnet-daemon-perl all 0.43-1 [46.6 kB]
+Get:14 http://ftp.us.debian.org/debian/ squeeze/main libplrpc-perl all 0.2020-2 [36.0 kB]
+Get:15 http://ftp.us.debian.org/debian/ squeeze/main libdbi-perl amd64 1.612-1 [883 kB]
+Get:16 http://ftp.us.debian.org/debian/ squeeze/main libdbd-mysql-perl amd64 4.016-1 [140 kB]
+Get:17 http://ftp.us.debian.org/debian/ squeeze/main psmisc amd64 22.11-1 [119 kB]
+Get:18 http://ftp.us.debian.org/debian/ squeeze/main libaio1 amd64 0.3.107-7 [7928 B]
+Get:19 http://repo.percona.com/apt/ squeeze/main percona-server-server-5.6 amd64 5.6.15-rel63.0-519.squeeze [27.0 MB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 50.2 MB in 48s (1034 kB/s)
+Selecting previously deselected package adduser.
+6239 files and directories currently installed.)
+Unpacking adduser (from .../adduser_3.112+nmu2_all.deb) ...
+Selecting previously deselected package net-tools.
+Unpacking net-tools (from .../net-tools_1.60-23_amd64.deb) ...
+Selecting previously deselected package ifupdown.
+Unpacking ifupdown (from .../ifupdown_0.6.10_amd64.deb) ...
+Selecting previously deselected package libgdbm3.
+Unpacking libgdbm3 (from .../libgdbm3_1.8.3-9_amd64.deb) ...
+Selecting previously deselected package netbase.
+Unpacking netbase (from .../archives/netbase_4.45_all.deb) ...
+Selecting previously deselected package libdb4.7.
+Unpacking libdb4.7 (from .../libdb4.7_4.7.25-9_amd64.deb) ...
+Selecting previously deselected package perl-modules.
+Unpacking perl-modules (from .../perl-modules_5.10.1-17squeeze6_all.deb) ...
+Selecting previously deselected package perl.
+Unpacking perl (from .../perl_5.10.1-17squeeze6_amd64.deb) ...
+Selecting previously deselected package libmysqlclient16.
+Unpacking libmysqlclient16 (from .../libmysqlclient16_5.1.72-rel14.10-597.squeeze_amd64.deb) ...
+Selecting previously deselected package libnet-daemon-perl.
+Unpacking libnet-daemon-perl (from .../libnet-daemon-perl_0.43-1_all.deb) ...
+Selecting previously deselected package libplrpc-perl.
+Unpacking libplrpc-perl (from .../libplrpc-perl_0.2020-2_all.deb) ...
+Selecting previously deselected package libdbi-perl.
+Unpacking libdbi-perl (from .../libdbi-perl_1.612-1_amd64.deb) ...
+Selecting previously deselected package libdbd-mysql-perl.
+Unpacking libdbd-mysql-perl (from .../libdbd-mysql-perl_4.016-1_amd64.deb) ...
+Selecting previously deselected package psmisc.
+Unpacking psmisc (from .../psmisc_22.11-1_amd64.deb) ...
+Selecting previously deselected package libaio1.
+Unpacking libaio1 (from .../libaio1_0.3.107-7_amd64.deb) ...
+Selecting previously deselected package libmysqlclient18.1.
+Unpacking libmysqlclient18.1 (from .../libmysqlclient18.1_5.6.15-rel63.0-519.squeeze_amd64.deb) ...
+Selecting previously deselected package percona-server-common-5.6.
+Unpacking percona-server-common-5.6 (from .../percona-server-common-5.6_5.6.15-rel63.0-519.squeeze_amd64.deb) ...
+Selecting previously deselected package percona-server-client-5.6.
+Unpacking percona-server-client-5.6 (from .../percona-server-client-5.6_5.6.15-rel63.0-519.squeeze_amd64.deb) ...
+Selecting previously deselected package percona-server-server-5.6.
+Unpacking percona-server-server-5.6 (from .../percona-server-server-5.6_5.6.15-rel63.0-519.squeeze_amd64.deb) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Configuring percona-server-server-5.6
+-------------------------------------
+
+While not mandatory, it is highly recommended that you set a password for the
+Percona Server administrative "root" user.
+
+If that field is left blank, the password will not be changed.
+
+
+Use of uninitialized value $_[1] in join or string at /usr/share/perl5/Debconf/DbDriver/Stack.pm line 111.
+addgroup: `/etc/adduser.conf' does not exist. Using defaults.
+adduser: `/etc/adduser.conf' does not exist. Using defaults.
+df: Warning: cannot read table of mounted file systems: No such file or directory
+Use of uninitialized value $val in substitution (s///) at /usr/share/perl5/Debconf/Format/822.pm line 83, <GEN6> line 1.
+Use of uninitialized value $val in concatenation (.) or string at /usr/share/perl5/Debconf/Format/822.pm line 84, <GEN6> line 1.
+Setting up adduser (3.112+nmu2) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Setting up net-tools (1.60-23) ...
+Setting up ifupdown (0.6.10) ...
+ifupdown.postinst: Warning: No 'iface lo' definition found in /etc/network/interfaces
+ifupdown.postinst: Warning: No 'auto lo' statement found in /etc/network/interfaces
+Setting up libgdbm3 (1.8.3-9) ...
+Setting up netbase (4.45) ...
+Setting up libdb4.7 (4.7.25-9) ...
+Setting up libmysqlclient16 (5.1.72-rel14.10-597.squeeze) ...
+Setting up psmisc (22.11-1) ...
+Setting up libaio1 (0.3.107-7) ...
+Setting up libmysqlclient18.1 (5.6.15-rel63.0-519.squeeze) ...
+Setting up percona-server-common-5.6 (5.6.15-rel63.0-519.squeeze) ...
+Setting up perl-modules (5.10.1-17squeeze6) ...
+Setting up perl (5.10.1-17squeeze6) ...
+update-alternatives: using /usr/bin/prename to provide /usr/bin/rename (rename) in auto mode.
+Setting up libnet-daemon-perl (0.43-1) ...
+Setting up libplrpc-perl (0.2020-2) ...
+Setting up libdbi-perl (1.612-1) ...
+Setting up libdbd-mysql-perl (4.016-1) ...
+Setting up percona-server-client-5.6 (5.6.15-rel63.0-519.squeeze) ...
+Setting up percona-server-server-5.6 (5.6.15-rel63.0-519.squeeze) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+Configuring percona-server-server-5.6
+-------------------------------------
+
+While not mandatory, it is highly recommended that you set a password for the
+Percona Server administrative "root" user.
+
+If that field is left blank, the password will not be changed.
+
+
+Use of uninitialized value $_[1] in join or string at /usr/share/perl5/Debconf/DbDriver/Stack.pm line 111.
+invoke-rc.d: policy-rc.d denied execution of stop.
+
+
+ * Percona Server is distributed with several useful UDF (User Defined Function) from Percona Toolkit.
+ * Run the following commands to create these functions:
+
+    mysql -e "CREATE FUNCTION fnv1a_64 RETURNS INTEGER SONAME 'libfnv1a_udf.so'"
+    mysql -e "CREATE FUNCTION fnv_64 RETURNS INTEGER SONAME 'libfnv_udf.so'"
+    mysql -e "CREATE FUNCTION murmur_hash RETURNS INTEGER SONAME 'libmurmur_udf.so'"
+
+ * See http://www.percona.com/doc/percona-server/5.5/management/udf_percona_toolkit.html for more details
+
+
+invoke-rc.d: policy-rc.d denied execution of start.
+ ---> a8342800229d
+Step 7 : RUN /usr/bin/mysqld_safe &sleep 3s &&echo "GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY \"root\" WITH GRANT OPTION;" | mysql
+ ---> Running in 4ac0a8b15d39
+131219 20:55:15 mysqld_safe Logging to '/var/lib/mysql/bccbd74c22c9.err'.
+131219 20:55:15 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+ ---> abe2cf08adc1
+Step 8 : EXPOSE 3306
+ ---> Running in 91fe058dd0eb
+ ---> 39a4432a931a
+Step 9 : ENTRYPOINT ["usr/bin/mysqld_safe"]
+ ---> Running in bae0fd9c04d8
+ ---> e18c914671f0
+Successfully built e18c914671f0
+```
+
+Notre image est prête. Vérifions cela avec la commande `images`,
+
+```sh
+$ docker images
+REPOSITORY             TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+pkoin/percona-server   latest              8d62b151689c        5 seconds ago       464.9 MB
+tianon/debian          squeeze             05b866649fa8        9 days ago          110.7 MB
+```
+
+<i class="fa fa-lightbulb-o"></i> À chaque fois que vous allez modifier votre image, Docker va créer des états intermédiaires. Cela peut être comparé à des commits git. Docker s'appuie sur un système de fichier organisé en layer. A chaque fois qu'un fichier est ajouté, cela sera fait sur le layer supérieur. Si un fichier est modifié, celui-ci est copié sur le layer le plus haut et les changements sont sauvegardés dans un layer inférieur.
+
+![Système de fichier multi-layer](images/docker/filesystems-multilayer.png)
+
+Grâce à cela, Docker peut nous mettre à disposition la commande `history` afin d'obtenir l'intégralité des modifications effectuées sur notre image.
+
+Par curiosité, regardons les différents layers créés,
+
+```sh
+$ docker history pkoin/percona-server
+IMAGE               CREATED             CREATED BY                                      SIZE
+e703f19169fa        47 minutes ago      /bin/sh -c #(nop) ENTRYPOINT ["/usr/bin/mysql   0 B
+0a42bf091ca8        47 minutes ago      /bin/sh -c #(nop) EXPOSE [3306]                 0 B
+42f1c10f6b0f        47 minutes ago      /bin/sh -c /usr/bin/mysqld_safe &sleep 10s &&   62.92 MB
+1fd4e4128744        About an hour ago   /bin/sh -c apt-get install -y percona-server-   288.8 MB
+f9c35e11c359        About an hour ago   /bin/sh -c apt-get update                       2.448 MB
+aa981a9093d4        About an hour ago   /bin/sh -c echo "deb-src http://repo.percona.   94 B
+da65ba132f2b        About an hour ago   /bin/sh -c echo "deb http://repo.percona.com/   45 B
+c5652b11ff7e        About an hour ago   /bin/sh -c apt-key adv --keyserver keys.gnupg   34.54 kB
+05b866649fa8        9 days ago                                                          110.7 MB
+```
+
+Démarrons maintenant notre service Percona,
+
+```sh
+$ docker run -d -p 49101:3306 pkoin/percona-server
+```
+
+<i class="fa fa-lightbulb-o"></i> L'option `-d` permet de faire tourner le conteneur en arrière-plan. L'option `-p 49101:3306` permet de binder le port 49101 de la machine hôte au port 3306 du conteneur.
+
+On peut alors voir notre conteneur tourné grâce à la commande `ps`,
+
+```sh
+$ docker ps
+CONTAINER ID        IMAGE                         COMMAND                CREATED             STATUS              PORTS                     NAMES
+ca1644b1455e        pkoin/percona-server:latest   /usr/bin/mysqld_safe   10 minutes ago      Up 10 minutes       0.0.0.0:49101->3306/tcp   elegant_bardeen
+```
+
+Si on le souhaite, on peut obtenir plus d'informations sur le conteneur grâce à la commande : `docker inspect ca1644b1455e`
+
+Tentons maintenant de nous connecter au serveur Percona,
+
+```sh
+$ mysql -u root -p -h 127.0.0.1 -P 49101
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.15-63.0 Percona Server (GPL), Release 63.0
+
+Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> exit
+Bye
+```
+
+<i class="fa fa-lightbulb-o"></i> Docker vient :
+
+* d'utiliser notre image `pkoin/percona-server` (si cette image n'existerait pas en local, il aurait commencé par la télécharger)
+* de créer un nouveau conteneur LXC
+* d'allouer un système de fichier au conteneur
+* de monter un layer en lecture/écriture
+* d'allouer une interface réseau au conteneur
+* d'attribuer une adresse IP au conteneur
+* de démarrer le serveur Percona dans le conteneur
+
+Victory! \o/
