@@ -69,22 +69,7 @@
   text-align: center;
 }
 
-article {
-  h1 {
-    float: left;
-    font-size: 1.8em;
-    padding-right: 10px;
-    font-weight: bold;
-  }
-
-  .meta {
-    font-size: 1.1em;
-    &:before {
-      font-family: FontAwesome;
-      content: "\f101";
-      padding-right: 5px;
-    }
-  }
+.main-container {
 
   p {
     padding-top: 15px;
@@ -108,6 +93,22 @@ article {
 
 article.summary {
   padding-bottom: 20px;
+
+  h1 {
+    float: left;
+    font-size: 1.8em;
+    padding-right: 10px;
+    font-weight: bold;
+  }
+
+  .meta {
+    font-size: 1.1em;
+    &:before {
+      font-family: FontAwesome;
+      content: "\f101";
+      padding-right: 5px;
+    }
+  }
 
   a.more {
     font-size: 1.1em;
