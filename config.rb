@@ -105,3 +105,11 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 end
+
+# Deploy-specific configuration
+activate :deploy do |deploy|
+  deploy.build_before = true
+  deploy.method = :git
+  deploy.remote = "git@github.com:Koin/koin.github.io.git"
+  deploy.branch = "master"
+end
