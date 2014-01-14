@@ -1,5 +1,5 @@
 ---
-title: Créer une base box Debian sous Virtualbox pour Vagrant
+title: créer une base box Debian sous Virtualbox pour Vagrant
 date: 2014-01-14 20:45 UTC
 tags:
 ---
