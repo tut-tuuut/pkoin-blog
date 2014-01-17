@@ -85,6 +85,13 @@ $ chmod 700 .ssh
 $ chmod 600 .ssh/authorized_keys
 ```
 
+Vagrant est capable de provisionner une machine virtuelle grâce à [Chef](http://www.getchef.com/chef/). Profitons-en pour l'installer.
+
+```sh
+$ apt-get install curl
+$ curl -L https://www.opscode.com/chef/install.sh | bash
+```
+
 Notre machine virtuelle est prête. Il ne nous reste plus qu'à faire du ménage et à l'éteindre,
 
 ```sh
