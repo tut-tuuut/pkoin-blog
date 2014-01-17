@@ -1,0 +1,217 @@
+---
+title: paris web 2012
+date: 2012-10-20 17:09 UTC
+tags: web, paris, conférence
+---
+
+J'ai eu l'immense plaisir de participer à [Paris Web](http://www.paris-web.fr/), qui s'est déroulé du 17 au 19 octobre 2012, en tant qu'orateur. Pour ceux qui ne savent pas ce qu'est cet évènement,
+> Paris Web est la conférence francophone des gens qui font le web, explore les thèmes de l’accessibilité Web, du design numérique et des standards ouverts. **[www.paris-web.fr](http://www.paris-web.fr/)**
+
+[![Paris Web 2012, j'y étais](images/paris-web-2012/jyetais.jpg)](http://www.paris-web.fr/orateurs/julien-fusco.php)
+
+Accompagné d'[Anne-Sophie](http://www.paris-web.fr/orateurs/anne-sophie-tranchet.php), j'ai présenté comment l'équipe technique de &laquo;[TEA, The Ebook Alternative](http://www.tea-ebook.com)&raquo; s'est montée.
+
+Je ne vais pas vous re-faire la conférence ici mais si cela vous intéresse vous trouverez la [vidéo](http://www.paris-web.fr/2012/conferences/on-a-monte-une-equipe-de-zero.php#video) ainsi que les [slides](http://www.paris-web.fr/2012/conferences/on-a-monte-une-equipe-de-zero.php#video) sur le site de Paris Web.  
+Il s'agit plus ici d'un retour d'expérience.
+
+**<i class="fa fa-angle-double-right"></i> Arrivée sur Paris, Mercredi 16 Octobre.**
+
+Tous les orateurs ont rendez-vous à 19h devant l'hôtel histoire de récupérer leur chambres et d'aller manger ensemble.  
+
+**<i class="fa fa-angle-double-right"></i> Jeudi 17 Octobre, première journée de conférence.**
+
+09h00, [Sébastien](http://www.paris-web.fr/2007/Sebastien-Delorme.html), président de Paris Web 2012, nous fait un Hello World !
+ 
+09h10, [Daniel](http://www.paris-web.fr/2007/Sebastien-Delorme.html) prend la parole et commence sa conférence sur [le tournant des css vers le layout](http://www.paris-web.fr/2012/conferences/le-tournant-des-css-vers-le-layout.php). Je n'écoute pas vraiment, je passe sur scène dans moins d'1h, le stress m'envahit. Toutefois, je suis complètement bluffé par le charisme et l'aisance sur scène de Daniel.
+
+10h00, je prépare le matériel pour ma conférence.
+
+Bien entendu, ça ne se passe pas bien du premier coup. Pas de wifi, la connexion au vidéo-projecteur ne fonctionne pas, obligé d'installer des trucs à l'arrache, de monter un petit serveur local pour faire tourner mes slides HTML5, JS... Bref.
+
+![Stress](images/paris-web-2012/stress.jpg)
+
+10h15, le <a href="http://en.wikipedia.org/wiki/Social_proof">social proof</a>.
+
+10h50, les questions.
+
+Les gens ont l'air d'avoir aimé. Pas de remarques négatives, beaucoup d'échanges constructifs, de conseils. 
+ 
+11h00, applaudissements. C'est impressionant et tellement bon comme sensation.
+
+**<i class="fa fa-angle-double-right"></i> Le marathon des conférences**
+
+<i class="fa fa-bullhorn"></i> [Les nouveaux horizons de la cartographie sur le web](http://www.paris-web.fr/2012/conferences/les-nouveaux-horizons-de-la-cartographie-sur-le-web.php). Avis personnel : <i class="fa fa-frown-o"></i>
+
+[Benjamin](http://www.paris-web.fr/orateurs/benjamin-becquet.php) nous parle de Google Maps et des [API](https://developers.google.com/maps/). J'en ai déjà fait et je le rejoins sur le fait que c'est puissant et déconcertant de facilité.  
+On parle d'[Open Street Map](http://openstreetmap.fr/). Et là, il part dans des explications trop complexes. Quoi qu'il en soit, je sais dorénavant qu'il existe de vraies solutions pour ne plus dépendre de Google et de son nouveau système de [licence](https://developers.google.com/maps/licensing) absurde.
+
+<i class="fa fa-bullhorn"></i> [Les User Agents, c'est le mal](http://www.paris-web.fr/2012/conferences/les-user-agents-cest-le-mal.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Rudy](http://www.paris-web.fr/orateurs/rudy-rigot.php) est un orateur de génie. Ses répliques sont percutantes. Il nous explique pourquoi IE se fait passer pour Mozilla, pourquoi Opera tente désespérément de cacher aux serveurs web qu’ils ont un jour sorti une version "10". Bref, sa conférence est excellente.  
+
+<i class="fa fa-bullhorn"></i> [WebApps](http://www.paris-web.fr/2012/conferences/applications-mobiles-utiliser-le-web.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+C'était l'occasion pour [Bruno](http://www.paris-web.fr/orateurs/bruno-michel.php) et Anne-Sophie de mettre en avant le [teabook open reader](http://github.com/TEA-ebook/teabook-open-reader) et de nous faire une [démonstration](http://demo-open-reader.tea-ebook.com). C'est vraiment un superbe projet sur lequel [AF83](http://af83.com/fr) et TEA ont collaboré ensemble. Ce genre d'initiative fait vraiment plaisir.  
+Certaines personnes demandent pourquoi ne pas avoir fait du natif et évoque [l'échec de Facebook](http://techcrunch.com/2012/09/11/mark-zuckerberg-our-biggest-mistake-with-mobile-was-betting-too-much-on-html5/). Je pense que le débat n'a pas lieu d'exister. Je vous invite à aller lire &laquo; [Native vs Web is total bullshit](http://bradfrostweb.com/blog/post/native-vs-web-is-total-bullshit/) &raquo;.
+
+<i class="fa fa-bullhorn"></i> [Le web sera sécurisé ou ne sera pas](http://www.paris-web.fr/2012/conferences/le-web-sera-securise-ou-ne-sera-pas.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Virginie](http://www.paris-web.fr/orateurs/virginie-galindo.php) a parlé essentiellement de la [WebCryptoAPI](http://www.w3.org/TR/2012/WD-WebCryptoAPI-20120913/). C'est une API JS pour aider les développeurs à créer des modèles sécurisés et intéropérables. On parle de :
+
+* p2p communication
+* signing legal document
+* protection video content
+* checking authenticity of code/library
+* secured cloud data backup
+* user authentication
+
+Il est d'ores et déjà possible de :
+
+* générer un vrai nombre aléatoire
+* signer avec des clés
+
+Je vous conseille d'aller voir les [exemples](http://www.w3.org/TR/2012/WD-WebCryptoAPI-20120913/#examples-section).
+
+<i class="fa fa-bullhorn"></i> [Souriez (?) vous êtes trackés !](http://www.paris-web.fr/2012/conferences/souriez-vous-etes-trackes.php). Avis personnel : <i class="fa fa-frown-o"></i>
+
+Un peu trop superficiel. [Stéphane](http://www.paris-web.fr/orateurs/stephane-lebarque.php) a essentiellement parlé des [privacy icons](http://www.azarask.in/blog/post/privacy-icons/) et de l'entête HTTP [Do Not Track](http://en.wikipedia.org/wiki/Do_Not_Track). Très bien sur le papier mais non respecté dans la réalité. Aucune solution tel que [Ghostery](http://www.ghostery.com/) n'a été évoqué pour savoir par qui on est traqué et comment bloquer efficacement ce tracking insupportable.
+
+<i class="fa fa-bullhorn"></i> [L'art de prendre la fuite](http://www.paris-web.fr/2012/conferences/de-lart-de-prendre-la-fuite.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+Excellente conférence pleine d'humour de la part de [Thibault](http://www.paris-web.fr/orateurs/thibault-jouannic.php). Globalement, il explique que dans notre société il est mal vu de changer de travail, de quitter un CDI et que pourtant parfois c'est indispensable pour mieux rebondir. J'en ai retenu quelques excellentes répliques :
+ 
+* "Une introspection nocturne" =  Une beuverie entre potes
+* "Nous sommes tous des handicapés de la fuite"
+
+**<i class="fa fa-beer"></i> Fin de la première journée. Apéro communautaire**
+
+Quelle soirée ! J'y ai croisé pleins de gens intéressants et notamment [Matthieu](https://twitter.com/MatthieuSegret), un des deux fondateurs de [Human Coders](http://humancoders.com/).  
+J'ai appris que [MailChimp](http://mailchimp.com/) n'était pas qu'un excellent service de mailing mais qu'ils avaient également de superbes bonnets.
+
+![Bonnet Mailchimp](images/paris-web-2012/monkey-hat.jpg)
+
+**<i class="fa fa-angle-double-right"></i> Vendredi 18 Octobre, deuxième journée de conférence.**
+
+<i class="fa fa-bullhorn"></i> [Les tests utilisateurs à distance](http://www.paris-web.fr/2012/conferences/les-tests-utilisateurs-a-distance-interet-et-limites-dans-le-cycle-de-conception-centre-utilisateur.php). Avis personnel : <i class="fa fa-meh-o"></i>
+
+[Christian](http://www.paris-web.fr/orateurs/christian-bastien.php) nous explique que les tests utilisateurs à distance requièrent beaucoup de personnes et de temps. Il faut absolument donner des objectifs aux testeurs sur le site, via des bandeaux ou autres. 
+
+Plusieurs outils :
+
+* [Morae](http://www.techsmith.fr/morae.asp)
+* [WebRemUsine](http://hiis.isti.cnr.it/tools/WebRemUSINE/home)
+* [Evalyzer](http://www.evalyzer.com/)
+
+Les avantages d'Evalyzer : pas de scripts à installer, pas de logiciel client, techno transparente. Les fonctionnalités : Capture des comportements (écran, clics, scrolls), outils d'analyse.
+
+<i class="fa fa-bullhorn"></i> [README, un fichier nommé plaisir](http://www.paris-web.fr/2012/conferences/readme-un-fichier-nomme-plaisir.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Thomas](http://www.paris-web.fr/orateurs/thomas-parisot.php) démarre sa présentation sur un superbe trait d'humour :
+
+> N'écrivez jamais un mot court si un paragraphe entier améliore les affaires. **Senior Business Consultant IBM**
+
+Pour ceux qui ne comprennent pas, il s'agit d'une parodie de la citation de [George Orwell](http://fr.wikipedia.org/wiki/George_Orwell).
+
+> N'écrivez jamais un mot long si un mot court fait l'affaire. **George Orwell**
+
+Un fichier README est indispensable a un projet. Il doit être concis et contenir les informations suivantes : Quel est le but du projet ? Comment ? Détails techniques : installation, mise à jour, développement, déploiement ?  
+Un fichier README ne nécessite aucun apprentissage. On se moque de la syntaxe, de la grammaire, il faut juste écrire des trucs intéressants et utiles. [KISS](http://en.wikipedia.org/wiki/KISS_principle)!
+
+<i class="fa fa-bullhorn"></i> [WebGL](http://www.paris-web.fr/2012/conferences/webgl-la-3d-cest-maintenant-dans-votre-navigateur.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Stéphane](http://www.paris-web.fr/orateurs/stephane-verdier.php) nous explique qu'avant, pour faire de la 3D, on utilisait DHTML mais c'était difficile, long, peu performant et [moche](http://www.uselesspickles.com/triangles/).  
+On pouvait également faire appel à des plugins : Flash, Java...
+
+WebGL, c'est cool mais ça nécessite toutefois d'avoir une carte graphique supportant la 3D, des pilotes OpenGL récents et un navigateur récent et à jour. Seulement [65%](http://webglstats.com/) des utilisateurs ont WebGL d'activé.
+
+Quelques librairies JS :
+
+* [Three.js](http://mrdoob.github.com/three.js/)
+* [PhiloGL](http://www.senchalabs.org/philogl/)
+* [GLGE](http://www.glge.org/)
+
+Quelques démos :
+
+* [HexGL](http://hexgl.bkcore.com/)
+* [Eve Online](http://www.eveonline.com/universe/spaceships/)
+* [Planetoweb](http://planetoweb.net/app/planetView.html)
+
+<i class="fa fa-bullhorn"></i> [Le pair programming](http://www.paris-web.fr/2012/conferences/1-1-3-le-pair-programming-applique-au-web.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Stéphane](http://www.paris-web.fr/orateurs/stephane-angel.php) et [Mathieu](http://www.paris-web.fr/orateurs/mathieu-pillard.php) forment un très bon duo.
+
+Quelques rappels intéressants :
+
+* Le pair-programming, c'est fatiguant. Il faut prendre des pauses et ne pas hésiter à couper une session en cas de désaccord.
+* C'est adapté à des petites tâches, des algorithmes complexes, mais aussi à des proof of concept.
+* Vous êtes tout seul ? [Technique du canard en plastique](http://fr.wikipedia.org/wiki/M%C3%A9thode_du_canard_en_plastique) !
+
+<i class="fa fa-bullhorn"></i> [Application cache is a douchebag](http://www.paris-web.fr/2012/conferences/application-cache.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Jake](http://www.paris-web.fr/orateurs/jake-archibald.php) est tout simplement génial. Il démarre sa conférence sur cette image et ces quelques paroles.
+
+![AppCache](images/paris-web-2012/application-cache-toilettes.jpg)
+
+> Il y a un moment, là où je travaillais, je devais aller faire la grosse commission aux toilettes. Il y avait cinq cabinets à l'intérieur. Malheureusement, les quatre premiers étaient occupés. En général ce n'est pas grave, je n'ai besoin que d'un cabinet. Mais je savais par mes expériences passées que le Wi-fi du bureau n'allait que jusqu'au quatrième. J'y ai réfléchi un instant et je me suis dit : "Non. Je trouve cela totalement inacceptable." Et j'ai fait demi-tour et je suis retourné à mon bureau et j'ai attendu. Je suis devenu quelqu'un qui a besoin d'une connexion Internet pour aller faire caca. **Jake Archibald**
+
+J'ai beaucoup ri.  
+Prenez quelques instants et allez voir sa vidéo sur [le site de Paris Web](http://www.paris-web.fr/2012/conferences/application-cache.php). Beaucoup d'humour, mais également de vrais retour d'expérience. 
+
+<i class="fa fa-bullhorn"></i> [Lighting talks](http://www.paris-web.fr/2012/conferences/lightning-talks.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+Très grosse ambiance. Paris Web, c'est aussi [des gros moments de fun](https://www.youtube.com/watch?v=PqhOFjpLCBY).
+
+**<i class="fa fa-angle-double-right"></i> Troisième journée de conférence, Samedi 19 Octobre.**
+
+La journée des [ateliers](http://www.paris-web.fr/2012/ateliers/).
+
+<i class="fa fa-bullhorn"></i> [Le web fait du hors piste !](http://www.paris-web.fr/2012/ateliers/le-web-fait-du-hors-piste.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Jonathan](http://www.paris-web.fr/orateurs/jonathan-blanchet.php) nous sort plein de jouets et quelques lignes de javascript. Chouette !  
+Du bon gros WTF au programme. Interfacer une Kinect avec NodeJS, faire de la domotique avec Arduino et javascript, utilisation d'une manette de Xbox avec le jeu [HexGL](http://hexgl.bkcore.com/).  
+Tous les codes sources de son atelier sont disponibles sur [son github](https://github.com/jblanche/parisWeb2012).
+
+<i class="fa fa-bullhorn"></i> [1001 techniques pour faire exploser un projet web (et comment les éviter)](http://www.paris-web.fr/2012/ateliers/1001-techniques-pour-faire-exploser-un-projet-web-et-comment-les-eviter.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+On entre dans la salle et là [Maxime](http://www.paris-web.fr/orateurs/maxime-fortelle.php) et [Goulven](http://www.paris-web.fr/orateurs/goulven-champenois.php) nous attendent déguisé en ninja !
+On se rassemble par groupe de 5-6 personnes et le but est de vivre un projet web de A à Z.  
+Le projet : "Monter un e-commerce de ventes d'armes de ninja". Problématique : "Comment feriez-vous pour décrocher le projet ?". On se concerte en équipe, on écrit nos idées sur pleins de post-it. Puis ils inversent la problématique "Comment feriez-vous pour ne pas décrocher le projet ?".
+
+Tout fonctionne par un système positif puis négatif.
+
+Une chose est sûre. Tous autant que l'on est, on est beaucoup plus efficace pour trouver de mauvaises idées que de bonnes idées.  
+C'est assez logique, on a tous vécu de sales histoires en SSII. Des CV remaniés avec des compétences survitaminées, des chiffrages très bas qui obligent l'équipe technique à revoir à la baisse la qualité du produit, des ergonomies douteuses, des webdesigns ratés...  
+
+<i class="fa fa-bullhorn"></i> [Le projet web dont vous êtes le héros agile](http://www.paris-web.fr/2012/ateliers/le-projet-web-dont-vous-etes-le-heros-agile.php).
+
+> Le jeu se présente sous la forme d'un "livre dont vous êtes le héros", c'est à dire que vous êtes un groupe d'aventuriers qui devra évoluer d'étape en étape dans une odyssée aux multiples pièges et difficultés.
+
+J'ai complètement loupé cet atelier et je m'en mord les doigts. J'aime beaucoup les petits jeux autour de l'agilité. Tant pis, ça me fera l'occasion de faire maitre de jeu chez [TEA](http://www.tea-ebook.com) pour tester ce dernier.
+Le jeu est disponible sur [http://www.jabberwocky.fr/](http://www.jabberwocky.fr/).
+
+<i class="fa fa-bullhorn"></i> [HTML5/CSS3 et l'effet "Waouh !" : les dessous de la magie](http://www.paris-web.fr/2012/ateliers/html5css3-et-leffet-waouh-les-dessous-de-la-magie.php). Avis personnel : <i class="fa fa-smile-o"></i>
+
+[Jérémie](http://www.paris-web.fr/orateurs/jeremie-patonnier.php) et [Corinne](http://www.paris-web.fr/orateurs/corinne-schillinger.php) ont développé en quelques jours un petit site de blind test vidéo.  
+
+Technos employées :
+
+* [NodeJS](http://nodejs.org/) : serveur applicatif javascript.
+* [express](http://expressjs.com/) : framework web (inspiré de Sinatra en Ruby).
+* [socket.io](http://socket.io/) : vous permet de faire la liaison entre vous et les autres personnes connectées sur l’application web, le tout en temps réel, via les web sockets.
+* [underscore](http://underscorejs.org/) : librairie d'utilitaires indispensable !
+* [mustache](http://mustache.github.com/) : moteur de template js.
+* [modernizr](http://modernizr.com/) : librairie js permettant de savoir si le navigateur supporte les transformations CSS 3D, la vidéo HTML5, Canvas ou SVG, et de prévoir une alternative le cas échéant.
+
+Ils nous ont disséqué techniquement le projet.  
+Ils nous ont aussi prouvés qu'il est possible de gérer beaucoup de navigateurs (ainsi que pas mal de versions), se soucier de l'accessibilité dans des temps raisonnables tout en faisant des trucs bien cool. 
+
+Le code est disponible sur [github](https://github.com/JeremiePat/Demo-ParisWeb-2012).
+
+**<i class="fa fa-angle-double-right"></i> Fin des ateliers**
+
+Paris web 2012, c'était tout simplement super. J'ai appris pas mal de choses, j'ai rencontré beaucoup de personnes.  
+Je suis vraiment content d'avoir vécu cette expérience.
+
+Share the love! <i class="fa fa-heart-o"></i>
+
+![Julien](images/paris-web-2012/pkoin.jpg)
