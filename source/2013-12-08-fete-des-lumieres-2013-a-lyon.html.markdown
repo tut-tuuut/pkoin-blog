@@ -8,4 +8,4 @@ Chaque année, sur Lyon, s'organise la [fête des lumières](http://www.fetedesl
 
 Je m'y suis rendu et voici une petite compilation en image,
 
-![Julien](images/fete-lumieres-2013/fete_lumiere_2013.jpg)
+![Fête des lumières 2013](images/fete-lumieres-2013/fete_lumiere_2013.jpg)
