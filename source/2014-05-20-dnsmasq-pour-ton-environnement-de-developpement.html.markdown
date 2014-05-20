@@ -1,5 +1,5 @@
 ---
-title: Dnsmasq pour ton environnement de développement
+title: dnsmasq pour ton environnement de développement
 date: 2014-05-20 21:34 UTC
 tags: dnsmasq, dns, développement, réseau
 ---
