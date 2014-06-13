@@ -10,11 +10,11 @@ J'ai donc décidé de créer la mienne et pour cela la documentation de Vagrant 
 
 <i class="fa fa-cogs"></i> Mon installation :
 
-* Mac OSX 10.9.1
-* Virtualbox 4.3.6
-* Vagrant 1.3.5
+* Mac OSX 10.9.3
+* Virtualbox 4.3.12
+* Vagrant 1.6.3
 
-Avant toute chose, téléchargeons l'image iso d'une [Debian 6 (Squeeze) (AMD64)](http://gemmei.acc.umu.se/cdimage/archive/6.0.8/amd64/iso-cd/debian-6.0.8-amd64-netinst.iso).
+Avant toute chose, téléchargeons l'image iso d'une [Debian 7 (Wheezy) (AMD64)](http://cdimage.debian.org/debian-cd/7.5.0/amd64/iso-cd/debian-7.5.0-amd64-netinst.iso).
 
 Ensuite, grâce à Virtualbox, créons la machine virtuelle qui servira à créer notre base box :
 
@@ -49,10 +49,26 @@ Première étape, notre utilisateur `vagrant` doit être un sudoer sans mot de p
 ```sh
 $ apt-get install sudo
 $ visudo
-# Remplacer le contenu par :
-# Defaults    env_keep="SSH_AUTH_SOCK"
-# %admin ALL=(ALL) ALL
-# %admin ALL=NOPASSWD: ALL
+```
+
+Remplacer le contenu par :
+
+```
+Defaults        env_keep="SSH_AUTH_SOCK"
+Defaults        mail_badpass
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# User privilege specification
+root    ALL=(ALL:ALL) ALL
+
+# Allow members of group sudo to execute any command
+%admin  ALL=(ALL) ALL
+%admin  ALL=NOPASSWD: ALL
+```
+
+Ajoutons l'utilisateur `vagrant` au groupe `admin`,
+
+```sh
 $ groupadd admin
 $ usermod -a -G admin vagrant
 ```
@@ -62,8 +78,8 @@ Nous devons ensuite mettre en place les ajouts spécifiques à Virtualbox dans l
 ```sh
 $ apt-get autoremove virtualbox-ose-guest-dkms virtualbox-ose-guest-utils virtualbox-ose-guest-x11
 $ apt-get install linux-headers-$(uname -r) build-essential
-$ wget -cq http://dlc.sun.com.edgesuite.net/virtualbox/4.3.6/VBoxGuestAdditions_4.3.6.iso
-$ mount -o loop,ro /home/vagrant/VBoxGuestAdditions_4.3.6.iso /mnt
+$ wget -cq http://dlc.sun.com.edgesuite.net/virtualbox/4.3.12/VBoxGuestAdditions_4.3.12.iso
+$ mount -o loop,ro VBoxGuestAdditions_4.3.12.iso /mnt
 $ /mnt/VBoxLinuxAdditions.run --nox11
 $ umount /mnt
 ```
@@ -85,11 +101,27 @@ $ chmod 700 .ssh
 $ chmod 600 .ssh/authorized_keys
 ```
 
-Vagrant est capable de provisionner une machine virtuelle grâce à [Chef](http://www.getchef.com/chef/). Profitons-en pour l'installer.
+Vagrant est capable de provisionner une machine virtuelle grâce à [Chef](http://www.getchef.com/chef/). Il n'est plus nécessaire de l'installer lors de la création de la base box.  
+Il est même préférable de passer par le plugin vagrant [omnibus](https://github.com/schisamo/vagrant-omnibus).
+
+Sur le host (qui dispose de vagrant),
 
 ```sh
-$ apt-get install curl
-$ curl -L https://www.opscode.com/chef/install.sh | bash
+$ vagrant plugin install vagrant-omnibus
+```
+
+Voici un exemple de `Vagrantfile` utilisant omnibus pour installer la dernière version de chef,
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.define "my-first-vm" do |mfv|
+
+    mfv.vm.box = "my-first-base-box"
+    mfv.vm.hostname = "my-first-vm"
+
+    mfv.omnibus.chef_version = :latest
+  end
+end
 ```
 
 Notre machine virtuelle est prête. Il ne nous reste plus qu'à faire du ménage et à l'éteindre,
@@ -103,10 +135,7 @@ Créons la base box,
 
 ```sh
 $ vagrant package --base my-first-base-box
-[my-first-base-box] Clearing any previously set forwarded ports...
-[my-first-base-box] Creating temporary directory for export...
-[my-first-base-box] Exporting VM...
-[Debian] Compressing package to: package.box
+# coffee time!
 $ mv package.box my-first-base-box.box
 ```
 
@@ -114,27 +143,11 @@ Testons maintenant cette fameuse base box,
 
 ```sh
 $ vagrant box add my-first-base-box my-first-base-box.box
-Downloading or copying the box...
-Extracting box...te: 387M/s, Estimated time remaining: --:--:--)
-Successfully added box 'my-first-base-box' with provider 'virtualbox'!
+# coffee time!
 $ mkdir test
 $ cd test
 $ vagrant init my-first-base-box
 $ vagrant up
-# Bringing machine 'default' up with 'virtualbox' provider...
-# [default] Importing base box 'my-first-base-box'...
-# [default] Matching MAC address for NAT networking...
-# [default] Clearing any previously set forwarded ports...
-# [default] Creating shared folders metadata...
-# [default] Clearing any previously set network interfaces...
-# [default] Preparing network interfaces based on configuration...
-# [default] Forwarding ports...
-# [default] -- 22 => 2222 (adapter 1)
-# [default] Booting VM...
-# [default] Waiting for machine to boot. This may take a few minutes...
-# [default] Machine booted and ready!
-# [default] Mounting shared folders...
-# [default] -- /vagrant
 ```
 
 Victory! \o/
