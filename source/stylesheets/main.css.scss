@@ -111,13 +111,8 @@ article.summary {
   }
 
   a.more {
-    font-size: 1.1em;
+    font-weight: bold;
     text-decoration: none;
-    &:before {
-      font-family: FontAwesome;
-      content: "\f196";
-      padding-right: 5px;
-    }
   }
 
   p {

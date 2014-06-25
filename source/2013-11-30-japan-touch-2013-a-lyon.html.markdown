@@ -4,7 +4,7 @@ date: 2013-11-30 23:46 UTC
 tags: japan, lyon
 ---
 
-J'ai assisté à [Japan Touch](https://fr-fr.facebook.com/japantouch.asiexpo) 2013 qui s'est déroulé sur Lyon à Eurexpo. C'est un salon dédié à la culture japonaise. On va y trouver des jeux vidéos, des vêtements, de la nourriture, du sport, des mangas, des animes,... Bref, que du bon !
+J'ai assisté à [Japan Touch](https://fr-fr.facebook.com/japantouch.asiexpo) 2013 qui s'est déroulé sur Lyon à Eurexpo. C'est un salon dédié à la culture japonaise. On va y trouver des jeux vidéos, des vêtements, de la nourriture, du sport, des mangas, des animes,... Bref, que du bon !READMORE
 
 ![Japan Touch 2013](images/japan-touch-2013/flyer.jpg)
 

@@ -1,10 +1,10 @@
 ---
 title: docker
 date: 2013-12-19 10:08 UTC
-tags: docker, virtualisation, sysadmin
+tags: docker, virtualisation, devops
 ---
 
-J'utilise actuellement [VirtualBox](https://www.virtualbox.org/) et (l'indispensable) [Vagrant](http://www.vagrantup.com/) pour virtualiser mes différents environnements. Fin 2013, je pense qu'il n'est plus nécessaire de présenter ces deux formidables outils. Très simple à installer, à configurer et à utiliser, ce type de virtualisation a deux problèmes majeurs : c'est lent et ça consomme beaucoup de RAM (bien entendu, cela dépend du nombre de VMs et comment elles sont configurées). J'ai donc cherché une alternative et découvert [Docker](http://www.docker.io/).
+J'utilise actuellement [VirtualBox](https://www.virtualbox.org/) et (l'indispensable) [Vagrant](http://www.vagrantup.com/) pour virtualiser mes différents environnements. Fin 2013, je pense qu'il n'est plus nécessaire de présenter ces deux formidables outils. Très simple à installer, à configurer et à utiliser, ce type de virtualisation a deux problèmes majeurs : c'est lent et ça consomme beaucoup de RAM (bien entendu, cela dépend du nombre de VMs et comment elles sont configurées). J'ai donc cherché une alternative et découvert [Docker](http://www.docker.io/).READMORE
 
 Qu'est-ce que Docker ? Docker.io répond,
 

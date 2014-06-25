@@ -5,7 +5,7 @@ tags: ruby
 ---
 
 Voici maintenant quelques mois que je code en Ruby et je n'ai jamais pris le temps de centraliser les bonnes pratiques. Il est donc temps de m'y mettre !  
-Je me suis grandement inspiré de l'excellent [The Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).  
+Je me suis grandement inspiré de l'excellent [The Ruby Style Guide](https://github.com/bbatsov/ruby-style-guide).READMORE  
 Surtout, ne lisez pas la traduction française, elle n'est pas à jour, incomplète et parfois fausse !
 
 ![Ruby](images/ruby-style-guide/ruby.png)

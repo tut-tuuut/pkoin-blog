@@ -4,7 +4,7 @@ date: 2014-05-20 21:34 UTC
 tags: dnsmasq, dns, développement, réseau
 ---
 
-C'est pas le tout de monter un bel environnement de développement à grand coup de Vagrant, Docker, et VirtualBox, mais encore faut-il pouvoir y accéder.
+C'est pas le tout de monter un bel environnement de développement à grand coup de Vagrant, Docker, et VirtualBox, mais encore faut-il pouvoir y accéder.READMORE
 
 Pour cela, il existe la solution classique de modification du fichier `/etc/hosts`. Toutefois, cela est assez pénible car il faut le modifier à chaque fois qu'on créé un nouveau projet et cela nécessite obligatoirement les droits root sur la machine. Pas cool !
 

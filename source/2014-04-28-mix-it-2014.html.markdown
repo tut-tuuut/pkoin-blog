@@ -5,7 +5,7 @@ tags: mixit, conférence, lyon
 ---
 
 Le Mix-IT est une conférence, sur Lyon, accessible à tous, sur l’agilité, l'écosystème Java et les innovations IT, Web ou mobile.
-L'édition 2014 a eu lieu le 29 et 30 avril 2014 à CPE Lyon et avait pour thème "Des idées pour tout de suite !".
+L'édition 2014 a eu lieu le 29 et 30 avril 2014 à CPE Lyon et avait pour thème "Des idées pour tout de suite !".READMORE
 
 [![Mix-IT 2014](images/mixit-2014/mixit-banner.png)](http://www.mix-it.fr/)
 

@@ -1,10 +1,10 @@
 ---
 title: mini-conférence sur Docker pour l'AFUP
 date: 2014-02-26 21:00 UTC
-tags:
+tags: conférence, docker
 ---
 
-Ayant un peu avancé sur mon sujet du moment, à savoir Docker, j'ai pu donner une mini-conférence lors d'un apéro PHP.
+Ayant un peu avancé sur mon sujet du moment, à savoir Docker, j'ai pu donner une mini-conférence lors d'un apéro PHP.READMORE
 
 J'ai eu pas mal d'échanges intéressants et j'ai découvert les éléments suivants :
 

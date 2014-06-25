@@ -4,7 +4,7 @@ date: 2012-10-20 17:09 UTC
 tags: web, paris, conférence
 ---
 
-J'ai eu l'immense plaisir de participer à [Paris Web](http://www.paris-web.fr/), qui s'est déroulé du 17 au 19 octobre 2012, en tant qu'orateur. Pour ceux qui ne savent pas ce qu'est cet évènement,
+J'ai eu l'immense plaisir de participer à [Paris Web](http://www.paris-web.fr/), qui s'est déroulé du 17 au 19 octobre 2012, en tant qu'orateur.READMORE Pour ceux qui ne savent pas ce qu'est cet évènement,
 > Paris Web est la conférence francophone des gens qui font le web, explore les thèmes de l’accessibilité Web, du design numérique et des standards ouverts. **[www.paris-web.fr](http://www.paris-web.fr/)**
 
 [![Paris Web 2012, j'y étais](images/paris-web-2012/jyetais.jpg)](http://www.paris-web.fr/orateurs/julien-fusco.php)

@@ -6,8 +6,16 @@ per_page: 5
   <article class="summary">
     <h1><%= link_to article.title, article %></h1>
     <div class="meta"><%= article.date.strftime('%d/%m/%Y') %></div>
-    <div><%= article.summary 170 %></div>
-    <%= link_to "Lire la suite", article, class: "more" %>
+    <div><%= article.summary %> <%= link_to "Lire la suite…", article, class: "more" %></div>
+    <footer>
+      <div class="tags">
+        <% tags = [] %>
+        <% article.tags.each do |tag| %>
+          <% tags << link_to(tag, tag_path(tag)) %>
+        <% end %>
+        <strong>Tags :</strong> <%= tags.join ", " %>
+      </div>
+    </footer>
   </article>
 <% end %>
 

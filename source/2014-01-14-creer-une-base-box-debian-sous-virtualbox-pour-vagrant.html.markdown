@@ -1,10 +1,10 @@
 ---
 title: créer une base box Debian sous Virtualbox pour Vagrant
 date: 2014-01-14 20:45 UTC
-tags:
+tags: vagrant, virtualbox, virtualisation, devops
 ---
 
-Une liste impressionante de base box existent déjà sur [www.vagrantbox.es](http://www.vagrantbox.es/). Toutefois, je n'ai pas trouvé celle qui me convient.
+Une liste impressionante de base box existent déjà sur [www.vagrantbox.es](http://www.vagrantbox.es/). Toutefois, je n'ai pas trouvé celle qui me convient.READMORE
 
 J'ai donc décidé de créer la mienne et pour cela la documentation de Vagrant explique parfaitement [comment créer une base box](http://docs.vagrantup.com/v2/boxes/base.html).
 
