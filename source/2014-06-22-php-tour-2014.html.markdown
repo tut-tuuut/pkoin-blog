@@ -16,6 +16,8 @@ Les slides sont disponibles [ici](http://koin.github.io/on-a-monte-une-equipe-de
 Accompagné de [Pascal](http://afup.org/pages/phptourlyon2014/conferenciers.php#883), j'ai également présenté [comment on a fait pour améliorer la mise en place de notre environnement de développement chez TEA](http://afup.org/pages/phptourlyon2014/sessions.php#1112).  
 Les slides sont disponibles [ici](http://koin.github.io/notre-env-de-dev-n-est-plus-un-bizutage).
 
+La liste des conférences, ainsi que les notes et commentaires donnés par le public, est disponible sur [joind.in](https://joind.in/event/view/1705).
+
 ## <i class="fa fa-bullhorn"></i> [Coding and dreaming](http://afup.org/pages/phptourlyon2014/sessions.php#1076)
 
 Avis personnel : <i class="fa fa-smile-o"></i>
