@@ -1,0 +1,399 @@
+---
+title: php tour 2014
+date: 2014-06-22 19:19 UTC
+tags: php, conférence, lyon
+---
+
+Le PHP Tour est une conférence organisée par l'AFUP. Elle se déroule sur deux jours et réunit des experts PHP ainsi que des conférenciers spécialistes dans leur domaine.READMORE
+
+L'édition 2014 s'est tenue à la Manufacture des Tabacs de Lyon, dans le 8ème arrondissement, le 23 et 24 juin.
+
+[![Mix-IT 2014](images/phptour-2014/phptour-2014.png)](http://afup.org/pages/phptourlyon2014/)
+
+Accompagné d'[Anne-Sophie](http://afup.org/pages/phptourlyon2014/conferenciers.php#882), j'ai présenté [comment l'équipe technique de &laquo;TEA, The Ebook Alternative&raquo; s'est montée](http://afup.org/pages/phptourlyon2014/sessions.php#1111).
+
+Accompagné de [Pascal](http://afup.org/pages/phptourlyon2014/conferenciers.php#883), j'ai également présenté [comment on a fait pour améliorer la mise en place de notre environnement de développement chez TEA](http://afup.org/pages/phptourlyon2014/sessions.php#1112).
+
+## <i class="fa fa-bullhorn"></i> [Coding and dreaming](http://afup.org/pages/phptourlyon2014/sessions.php#1076)
+
+Avis personnel : <i class="fa fa-smile-o"></i>
+
+Conférence donnée par [Rasmus Lerdorf](http://afup.org/pages/phptourlyon2014/conferenciers.php#853).  
+Slides disponibles [ici](http://talks.php.net/phptour14#/).
+
+Rasmus nous raconte les débuts de PHP : pourquoi, comment et dans quel contexte il a écrit PHP. Il nous explique aussi les débuts de l'écosystème PHP et à quel point l'ouverture du code à la communauté fut très compliqué pour lui. À chaque fois qu'un patch était soumis, il avait envie de le jeter et de le ré-écrire mais il a du faire des compromis pour le bien du langage.  
+Selon lui, à l'époque, les gens qui utilisaient PHP se foutaient de la syntaxe ou de l'écosystème autour du langage. Ils voulaient juste solutionner des problèmes. Quand il a écrit PHP, il se moquait des problématiques suivantes :
+
+* les noms de fonction insensibles à la casse
+* l'inconsistance des nommages
+* les `globals`
+* les `register_globals`
+* les `magic_quotes`
+
+Il donne un exemple qui fait beaucoup rire les gens : l'inconsistance des paramètres `$needle` et `$haystack` entre les fonctions de manipulation des tableaux et les fonctions de manipulation des strings,
+
+```php
+# OMGWTFBBQ?
+array_search($needle, $haystack);
+strstr($haystack, $needle);
+in_array($needle, $haystack);
+substr_count($haystack, $needle);
+array_key_exists($needle, $haystack);
+strchr($haystack, $needle);
+```
+
+Il passe ensuite sur une petite leçon de morale en nous expliquant que l'on ne devrait plus être en PHP 5.2 ou PHP 5.3. Nous devrions être au moins en PHP 5.4 !  
+
+Il aborde ensuite les nouveautés de PHP 5.5 : 
+
+* les [generators](http://www.php.net/manual/en/language.generators.php)
+* les coroutines (cf. [article de Nikita Popov](http://nikic.github.io/2012/12/22/Cooperative-multitasking-using-coroutines-in-PHP.html))
+* le mot clé `finally`
+* les fonctions de gestion des mots de passe
+  * `password_hash`
+  * `password_verify`
+
+Une documentation de migration très complète est fourni et disponible à l'adresse : [php.net/migration55](http://php.net/migration55).
+
+Il aborde ensuite les nouveautés de PHP 5.6 :
+
+* l'amélioration de la syntaxe des fonctions variadiques
+* l'[argument unpacking](https://wiki.php.net/rfc/argument_unpacking)
+* les [constant scalar expressions](https://wiki.php.net/rfc/const_scalar_exprs)
+* la vérification des certificats SSL par défaut (enfin !)
+
+Une documentation de migration très complète est fourni et disponible à l'adresse : [php.net/migration56](http://php.net/migration56).
+
+Rasmus nous donne ensuite sa vison sur l'écosystème PHP actuel.  
+Il sépare les gens en 3 catégories : dreamer, hacker, coder.  
+Les dreamers rêvent à des choses incroyables. Ils voudraient que PHP soit 20 fois plus rapide. Ils ont beaucoup d'idées mais ils ne servent à rien.  
+Les coders sont très utiles mais trop opérationnel. Ils ne sont pas assez créatifs.  
+Les hakers dégagent des idées ultra intéressantes. Ils sont un peu fous et incontrôlables. Ils sont comme les dreamers à part qu'ils codent leurs idées.
+
+## <i class="fa fa-bullhorn"></i> [Je ne suis pas qu’un objet !](http://afup.org/pages/phptourlyon2014/sessions.php#1090)
+
+Avis personnel : <i class="fa fa-smile-o"></i>  
+
+Conférence donnée par [Gérald Croes](http://afup.org/pages/phptourlyon2014/conferenciers.php#864).  
+Slides disponibles [ici](http://www.croes.org/gerald/conf/php/lyon/2014/je_ne_suis_pas_quun_objet.pdf).
+
+Gérald nous annonce que le programme parfait n'existe pas et que le but de la conférence est d'essayer d'obtenir des applications plus solides, qui tournent et qui sont maintenables.
+
+La POO a pour but d'écrire du code ré-utilisable. Il doit être lisible par des collègues.
+
+> Any fool can write code that a computer can understand. Good programmers write code that humans can understand. **Martin Fowler**
+
+Un beau code est un code qui déclenche le moins de «WTFs/minutes».
+
+![WTFs/m](images/phptour-2014/wtfm.jpg)
+
+Le code parfait est un code transparent. Il se comporte comme on s'y attend.
+
+Il faut choisir correctement les noms de classe, de variables…  
+Par exemple, une classe `Services` ne veut rien dire. Une variable nommée `$i` est inutile.  
+Il faut arrêter de croire que le code est lu dans sa totalité. Il est lu par morceau.
+
+Le code est un jeu sérieux.
+> Always code as if the guy who ends up maintaining your code will be a violent psychopath who knows where you live. **Martin Golding**
+
+Les commentaires sont un aveu de faiblesse.
+> Good code is its own best documentation. As you’re about to add a comment, ask yourself, "How can I improve the code so that this comment isn’t needed?" **Steve McConnell**
+
+Selon Gérald, la PHPDoc est inutile car personne ne la génère et qu'en plus elle ment très souvent.
+
+Il met en avant un paradoxe énorme en programmation : quand on commence à coder, on ne connait absolument pas le métier ! À cela, il met en avant deux concepts :
+
+* [YAGNI](http://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it) (You aren't gonna need it)
+* [KISS](http://en.wikipedia.org/wiki/KISS_principle) (Keep it simple, stupid)
+
+On programme objet mais ce n'est pas ça l'important, on n'a pas besoin d'objets. On a besoin d'une solution qui fonctionne. Il faut penser intéractions.
+
+Gérald nous fait un bref rappel sur les Design Patterns : factory, decorator, adapter… Il s'agit d'un «catalogue d'architecture», d'une liste de problèmes et de solutions connus.
+
+Le principal problème des DP : avoir un marteau et penser que tous les problèmes sont des clous !
+
+Un problème récurrent chez les développeurs : Le code lasagne. Un code avec trop de couche, trop découplé.  
+Il nous conseil de ne découpler que ce qu'on a besoin. Il met en avant le principe [SOLID](http://en.wikipedia.org/wiki/SOLID) (Single responsibility, Open-closed, Liskov substitution, Interface segregation and Dependency inversion).
+
+Il fait une bref approche du [DDD](http://en.wikipedia.org/wiki/Domain-driven_design) (Domain Driven Design), en expliquant que le fait de parler métier avec le client permettra de leader l'architecture.
+
+## <i class="fa fa-bullhorn"></i> [Introduction à Docker et au monde des containers](http://afup.org/pages/phptourlyon2014/sessions.php#1009)
+
+Avis personnel : <i class="fa fa-smile-o"></i>  
+
+Conférence donnée par [Geoffrey Bachelet](http://afup.org/pages/phptourlyon2014/conferenciers.php#803).  
+Slides disponibles [ici](https://speakerdeck.com/ubermuda/introduction-a-docker).
+
+Il nous explique la différence entre les VMs et les conteneurs. Cf. [article sur Docker](http://koin.github.io/2013/12/19/docker.html).
+
+Il explique que si, dans un conteneur, aucun processus ne tourne en foreground, le conteneur n'a rien à faire et s'éteint. C'est pour cela qu'on parle de «service».
+
+Il explique brièvement les `Dockerfile` pour éviter d'itérer à la main dans les conteneurs : modifier son conteneur, commiter, modifier, commiter…
+
+Il donne la petite astuce du `ENV DEBIAN_FRONTEND noninteractive` afin d'éviter les questions pénibles lors d'un `apt-get install`.
+
+Il énumère ensuite les choses importantes, pour lui, gérées par Docker :
+
+* Le réseau : avec le "service discovery" (cela évite d'utiliser d'utiliser [etcd](https://github.com/coreos/etcd) ou [doorkeeper](https://github.com/doorkeeper-gem/doorkeeper)) et les liens entre conteneurs (`--link`)
+* Les volumes : comme nfs mais en bien mieux (ça permet, en autre, de créer des conteneurs juste pour stocker de la data) (`--volumes-from`)
+* Le Docker Hub : la communauté est impressionante (plus de contributeurs en 1 an que vagrant en 4 ans) et les builds sont possibles à partir de repos github directement (même les privés moyennant finance)
+* Docker Remote API : beaucoup de client (php, ruby…)
+
+Il reste un point noir sur lequel les équipes de Docker travail : l'orchestration des conteneurs. Cela peut devenir vite très pénible. Le toolkit [libswarm](https://github.com/docker/libswarm) a été annoncé à la DockerCon 2014 pour gérer plus facilement cela.  
+En sachant qu'il existe quand même beaucoup d'outils tierce : fig, gaudi… pour palier à cette problématique.
+
+Les principales utilités : environnement de développement, intégration continue, parallélisation des tests automatisés, déploiement continu, solution de paas privé…
+
+Durant les questions, j'ai appris également que les gens sous MacOSX utilisent [sshfs](http://doc.ubuntu-fr.org/sshfs) pour partager du code source entre leur host et un conteneur.
+
+## <i class="fa fa-bullhorn"></i> [Comment grapher et visualiser vos datas](http://afup.org/pages/phptourlyon2014/sessions.php#1059)
+
+Avis personnel : <i class="fa fa-smile-o"></i>  
+
+Conférence donnée par [Grégoire Pineau](http://afup.org/pages/phptourlyon2014/conferenciers.php#840).  
+Slides disponibles [ici](https://speakerdeck.com/lyrixx/comment-grapher-et-visualiser-vos-datas-at-phptourlyon-2014).
+
+Grégoire commence par nous expliquer pourquoi grapher.
+
+* pour tracer le comportement des utilisateurs
+* pour avoir de la visibilité sur l'utilisation des features
+* pour mesurer les performances de l'infrastructure
+
+Il recommande de tracer absolument tout et de trier ensuite.  
+Cela permet de répondre à des questions intéressantes comme :
+
+* nouveaux utilisateurs par jour
+* commentaires ajoutés
+* commandes validées
+* erreur 500
+* hit par controlleur / route
+
+Il tente ensuite de répondre à «Comment grapher ?»
+
+Il commence par mettre en avant [Graphite](https://graphite.readthedocs.org/en/latest/). C'est un outil, écrit en Python et utilisant Django, qui permet de stocker des time-series et de rendre des graphiques. Très utile mais très moche !
+
+Graphite s'appuie sur [Carbon](http://graphite.readthedocs.org/en/latest/carbon-daemons.html). C'est un démon qui reçoit les métriques et les injecte dans [Whisper](https://github.com/graphite-project/whisper), un outil bas niveau de stockage.
+
+Ce qui donne :
+
+* Le client (nous) (php, ruby…) envoie des données à Carbon (via tcp ou udp)
+* Carbon stocke les données dans Whisper
+* Graphite affiche des graphiques à partir des données dans Whisper
+
+Whisper est une time series database. Très proche d'un RRD (round-robin-database). Il génère et utilise des fichiers `.wsp` de même taille afin d'accéder le plus rapidemment aux données.
+
+Graphite va permettre de faire des comparaisons dans le temps très facilement.
+
+Grégoire nous explique qu'il faut faire attentioncar Graphite ne garde que la dernière valeur sur l'intervalle de temps données. Toutefois, une solution de contournement existe : [StatsD](https://github.com/etsy/statsd/) (démon Node.js écrit par Etsy). Du coup, notre client communiquera directement avec StatsD, qui communiquera avec Graphite.
+
+Graphite met également à disposition une API assez complète.
+
+En Symfony2, il est possible d'écrire un MetricBundle (qui utilise le client [metrics](https://github.com/beberlei/metrics) ou [StatsD](https://github.com/M6Web/Statsd)) va nous permettre de :
+
+* se brancher sur tous les listeners possibles (kernel.terminate)
+  * pour grapher les temps de réponse
+  * la mémoire
+  * les status code
+* tracer le nombre et le type de requêtes sql / page via Doctrine
+
+Attention au nommage des métrics. C'est très important de les choisir correctement dès le départ car on peut «glober» avec Graphite.  
+Par exemple, pour les compteurs, on peut suffixer par un verbe au passé (project.created, violation.comment.created…)
+
+Dernière recommandation : il faut absolument installer StatsD sur un SSD. Il effectue des accès au disque très important.
+
+Pour visualiser les données, il est possible de construire des dashboards ou en utiliser des existants : [Giraffe](https://github.com/kenhub/giraffe), [Cubism](https://square.github.io/cubism/), [Grafana](http://grafana.org/)…
+
+## <i class="fa fa-bullhorn"></i> [Utiliser PostgreSQL en 2014](http://afup.org/pages/phptourlyon2014/sessions.php#1007)
+
+Avis personnel : <i class="fa fa-meh-o"></i>  
+
+Conférence donnée par [Dimitri Fontaine](http://afup.org/pages/phptourlyon2014/conferenciers.php#800).
+
+Un SGBD respectable se doit d'être [ACID](http://en.wikipedia.org/wiki/ACID) (atomicité, cohérence, isolation et durabilité).  
+Un SGBD n'est pas ACID si il a un mauvais système de transactions.  
+En tant qu'utilisateur, on doit pouvoir réaliser ce genre de requête :
+
+```sql
+BEGIN
+CREATE INDEX …
+EXPLAIN ANALYSE SELECT …
+ROLLBACK
+```
+
+PostgreSQL permet de faire des backups cohérents à chaud.
+
+Il assure également une réelle cohérence des données avec des typage de données assez complexe :
+
+* tsrange : intervalle de temps
+* circle
+* iprange
+* point (earth distance)
+* array
+* xml
+* json
+
+PostgreSQL permet de faire des requêtes sur des ranges d'adresse ip.  
+Il permet d'utiliser l'opérateur `with` qui est dans la norme sql depuis très longtemps.
+Il implémente un opérateur de distance `<->` qui peut fonctionner avec les ips, les points, les strings…  
+Il est également possible d'utiliser xpath pour faire une recherche dans des données xml et ce type de requête peut être indexé.
+
+## <i class="fa fa-bullhorn"></i> [Transition agile 4 real @ meetic](http://afup.org/pages/phptourlyon2014/sessions.php#1119)
+
+Avis personnel : <i class="fa fa-smile-o"></i>  
+
+Conférence donnée par [Nicolas Kalmanovitz](http://afup.org/pages/phptourlyon2014/conferenciers.php#840) et [Thomas Diavet](http://afup.org/pages/phptourlyon2014/conferenciers.php#890).
+Slides disponibles [ici](http://fr.slideshare.net/tdiavet/transition-agile-4-real-meetic).
+
+Les équipes de Meetic étaient organisé sur des cycles en V. Ils sont ensuite passé à SCRUM.
+
+En 2011, Meetic est un gros paquebot lent dans un milieu où tout va vite.
+
+La méthodo Scrum, facile à apprendre, allait leur permettre une approche structurée, simple et efficace des méthodes agiles.
+
+Avant de passer sous Scrum, ils sont passés sous Kanban afin de séduire la direction. Ils ont appris que c'est compliqué de mettre du Kanban directement et ça a été un échec dans leurs équipes.  
+La transition de Scrum vers Kanban est, par contre, beaucoup plus facile.
+
+Ils ont joués à [GetKanban](http://getkanban.com/) avec la direction pour les convaincre.
+
+Ils ont également appris que les boards physiques sont très importants. Ils permettent d'identifier rapidement les points de blocage.
+
+À l'époque, leur équipe était dispersé. Le Scrum Master, les développeurs, les intégrateurs et les testeurs ne travaillent pas ensemble physiquement. Ils ont décidé de les rapprocher et ça a vraiment tout changé chez eux.
+
+Ils ont plusieurs équipes sous SCRUM mais chaque équipe fait maximum 8 membres.  Ils sont sous des sprints de 15 jours.  
+Ils font des releases toutes les 2 semaines.  
+Ils travaillent sous git avec un vrai travail sur les branches.
+
+Ils obtiennent plus d'autonomie, plus de communication, une meilleure priorisation et une amélioration de la qualité assez rapidement.
+
+Ce qu'ils ont appris :
+
+* il faut de l'accompagnement : sinon démonstration ratée, sprint raté…
+* il ne faut pas plusieurs PO : sinon chevauchement des responsabilités
+* il faillait qu'il retravaille leur time to market : problématique des releases toutes les 2 semaines alors que la feature était finalisé pendant le sprint
+* l'outillage est très important
+
+Afin de réduire le time-to-market, ils ont travaillé sur :
+
+* le Quality Driven Development
+* de l'intégration continue (puppet, capistrano)
+* de l'industrialisation
+* de la refonte
+
+Ils ont fait appel à un consultant pour appuyer leur choix d'agilité, faire de la formation et de la conduite de changement. Ça leur a été très bénéfique.
+
+## <i class="fa fa-bullhorn"></i> [Take a walk on the OPS side](http://afup.org/pages/phptourlyon2014/sessions.php#1036)
+
+Avis personnel : <i class="fa fa-smile-o"></i>  
+
+Conférence donnée par [Baptiste Dupain](http://afup.org/pages/phptourlyon2014/conferenciers.php#822).
+Slides disponibles [ici](http://fr.slideshare.net/bdu_p/take-a-walk-on-the-ops-side-php-tour-2014).
+
+Baptiste nous explique tout d'abord comment debugger php sans php avec [sysdig](http://www.sysdig.org/). Cela permet, par exemple, de faire remonter des instructions `curl` sans timeout (60s par defaut, c'est énorme !) qui peuvent faire tomber un site.
+
+On peut également faire ressortir toutes les requêtes sql grâce à :
+```sh
+$ sysdig -w php.scap proc.name=php
+$ sysdig -A proc.name=php5-fpm and evt.buffer contains SELECT
+```
+
+Il nous explique ensuite comment surveiller et mesurer des données grâce aux outils comme :
+
+* collectd : données systèmes CPU, Ram, I/O, Net
+* sensu : monitoring distribué (basé sur RabbitMQ) -> hipchat, http, logstash
+* seyren : alerting basé sur des seuils Graphite (send to hipchat)
+* mayday : (mieux que seyren) contextualise l'alerte
+
+Il tente ensuite de nous expliquer comment donner du sens à ses logs :
+
+* logs http : roadster
+* logs php : script python
+* logs mysql : anemometer
+* logs firewall / syslog : rsyslog central
+* logs dev : ELK
+
+Chez M6Web, les logs représentent entre 450 et 700 millions de lignes par jour. 
+
+Ils en utilisent à peine 50% via :
+
+* elasticsearch, logstash, kibana
+
+[Sense](https://github.com/bleskes/sense) et [Kopf](https://github.com/lmenezes/elasticsearch-kopf) permettent de rendre plus facile les devs sur elasticsearch. Il existe [grokdebug.herokuapp.com](grokdebug.herokuapp.com) pour tester des configurations pour logstash.
+
+Il présente ensuite le projet [R](http://www.r-project.org/), le Excel du hipster. C'est un outil simple pour les stats et du machine learning.
+
+Il nous explique ensuite pourquoi bencher son applicatif est important :
+
+* test de charge
+  * capable de tenir 50K users ?
+* test de stress
+  * jusqu'où on peut tenir ?
+* test de perf
+  * xp utilisateur
+  * qu'est-ce qui est acceptable ?
+
+Et il nous donne des outils pour faire cela :
+
+* [jmeter](http://jmeter.apache.org/) & [gatling](http://gatling-tool.org/)
+* [siege](http://www.joedog.org/siege-home/)
+* [wrk](https://github.com/wg/wrk) : plus simple que siege
+* [tsung](http://tsung.erlang-projects.org/)
+* [gor](https://github.com/buger/gor) : réplique le traffic en temps réel
+
+Quelques saas : 
+
+* [blitz.io](blitz.io) : bourrin, gratuit
+* [blazemeter](http://blazemeter.com/)
+* [neotys](http://www.neotys.fr/) : les meilleurs du test de charge
+
+## <i class="fa fa-bullhorn"></i> [Comment migrer un projet majeur sous Symfony2 ?](http://afup.org/pages/phptourlyon2014/sessions.php#1101)
+
+Avis personnel : <i class="fa fa-smile-o"></i>  
+
+Conférence donnée par [Thomas Rabaix](http://afup.org/pages/phptourlyon2014/conferenciers.php#873) de l'équipe [Ekino](http://www.ekino.com/).
+
+Avant de commencer à coder, il ont mis en place un Wiki sur lequel ils ont partagés toute la connaissance acquise sur le métier.
+
+Ils ont ensuite réalisés un audit interne :
+
+* 650K loc
+* Zend1, toupti1, toupti2, framework interne
+* moteur de template smarty
+* 250 méthodes REST
+* beaucoup de code dupliqué
+
+L'architecture était très complexe.
+
+Ils ont effectués une migration en plusieurs étapes.
+
+**ÉTAPE 0 : Réfléchir**
+
+Création d'un outil interne pour comprendre l'architecture en place par l'analyse du code.
+
+**Étape 1 : Industrialiser**
+
+Le but est de ne pas perdre du temps sur ce qui n'est pas important et répétitif.  
+Il s'agit pour lui du point le plus important.
+
+Ils ont utilisé :
+
+* vagrant et puppet pour les envs de dev
+* github et jira pour le code support
+* un mirroring packagist
+* jenkins pour piloter le tout
+
+**Étape 2 : Refonte**
+
+Ils ont entamé la refonte du modèle de données sous Doctrine. Ils ont écris un data mapper pour lire de l'atom (ORM/Atom). Et ils ont mis en place un Symfony2.
+
+**Étape 3 : Migration du code legacy**
+
+Ils ont portés le code legacy dans un répertoire spécifique de la nouvelle application. Ils ont utilisé le mode multi-kernel pour sf2.
+
+Ils ont créé un bundle crade (DigipostLegacy) pour permettre la transition et l'encapsulation de l'ancien code legacy. Exemple d'utilisation :
+
+```php
+new Cature()->return function() { include mon-code-legacy.php }
+```
+
+Avant le refonte, ils ont mis en place des tests pour s'assurer que rien ne cassait. Ils ont appelé l'outil «Maniac», assez fun :-)  
+Ils ont activé le code coverage via phpunit afin de détecter du code mort, et des parties non couvertes.
