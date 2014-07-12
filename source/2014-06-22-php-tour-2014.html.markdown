@@ -10,9 +10,11 @@ L'édition 2014 s'est tenue à la Manufacture des Tabacs de Lyon, dans le 8ème 
 
 [![Mix-IT 2014](images/phptour-2014/phptour-2014.png)](http://afup.org/pages/phptourlyon2014/)
 
-Accompagné d'[Anne-Sophie](http://afup.org/pages/phptourlyon2014/conferenciers.php#882), j'ai présenté [comment l'équipe technique de &laquo;TEA, The Ebook Alternative&raquo; s'est montée](http://afup.org/pages/phptourlyon2014/sessions.php#1111).
+Accompagné d'[Anne-Sophie](http://afup.org/pages/phptourlyon2014/conferenciers.php#882), j'ai présenté [comment l'équipe technique de &laquo;TEA, The Ebook Alternative&raquo; s'est montée](http://afup.org/pages/phptourlyon2014/sessions.php#1111).  
+Les slides sont disponibles [ici](http://koin.github.io/on-a-monte-une-equipe-de-zero).
 
-Accompagné de [Pascal](http://afup.org/pages/phptourlyon2014/conferenciers.php#883), j'ai également présenté [comment on a fait pour améliorer la mise en place de notre environnement de développement chez TEA](http://afup.org/pages/phptourlyon2014/sessions.php#1112).
+Accompagné de [Pascal](http://afup.org/pages/phptourlyon2014/conferenciers.php#883), j'ai également présenté [comment on a fait pour améliorer la mise en place de notre environnement de développement chez TEA](http://afup.org/pages/phptourlyon2014/sessions.php#1112).  
+Les slides sont disponibles [ici](http://koin.github.io/notre-env-de-dev-n-est-plus-un-bizutage).
 
 ## <i class="fa fa-bullhorn"></i> [Coding and dreaming](http://afup.org/pages/phptourlyon2014/sessions.php#1076)
 
