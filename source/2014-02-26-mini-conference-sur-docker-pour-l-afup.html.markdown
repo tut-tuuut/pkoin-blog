@@ -13,4 +13,4 @@ J'ai eu pas mal d'échanges intéressants et j'ai découvert les éléments suiv
 
 Plus de détails sur le site de l'[AFUP](http://lyon.afup.org/2014/02/10/apero-php-mardi-25-fevrier/).
 
-Mes slides sont disponibles [ici](http://koin.github.io/what-is-docker).
+Mes slides sont disponibles [ici](http://pkoin.github.io/what-is-docker).
