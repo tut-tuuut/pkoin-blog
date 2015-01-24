@@ -4,11 +4,11 @@ date: 2014-05-20 21:34 UTC
 tags: dnsmasq, dns, développement, réseau
 ---
 
-C'est pas le tout de monter un bel environnement de développement à grand coup de Vagrant, Docker, et VirtualBox, mais encore faut-il pouvoir y accéder.READMORE
+C'est pas le tout de monter un bel environnement de développement à grands coups de Vagrant, Docker, et VirtualBox, mais encore faut-il pouvoir y accéder.READMORE
 
-Pour cela, il existe la solution classique de modification du fichier `/etc/hosts`. Toutefois, cela est assez pénible car il faut le modifier à chaque fois qu'on créé un nouveau projet et cela nécessite obligatoirement les droits root sur la machine. Pas cool !
+Pour cela, il existe la solution classique de la modification du fichier `/etc/hosts`. Toutefois, cela est assez pénible car il faut le modifier à chaque fois qu'on crée un nouveau projet et cela nécessite obligatoirement les droits root sur la machine. Pas cool !
 
-Une autre approche (plus belle et plus pratique !) consiste à utiliser un serveur DNS en local. Contrairement à ce que l'on peut penser, cette approche n'est pas très compliqué et offre une plus grande souplesse de configuration.
+Une autre approche (plus belle et plus pratique !) consiste à utiliser un serveur DNS en local. Contrairement à ce que l'on peut penser, cette approche n'est pas très compliquée et offre une plus grande souplesse de configuration.
 
 Dans cet article, je vais utiliser [Dnsmasq](http://www.thekelleys.org.uk/dnsmasq/doc.html) sous un environnement Mac OSX (10.9.2) disposant de [Homebrew](http://brew.sh/).
 
@@ -62,7 +62,7 @@ $ sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 Passons maintenant au plus intéressant : la configuration.  
 
 Prenons un exemple concret.  
-Nous souhaitons que toutes les requêtes, qui se terminent par `.lxc`, retournent `127.0.0.1`.
+Nous souhaitons que toutes les requêtes qui se terminent par `.lxc` retournent `127.0.0.1`.
 
 Comme nous l'avons vu plus haut, le fichier par défaut de configuration se trouve dans `/usr/local/etc/dnsmasq.conf`. Nous allons donc l'éditer pour ajouter la ligne suivante à la fin.
 
