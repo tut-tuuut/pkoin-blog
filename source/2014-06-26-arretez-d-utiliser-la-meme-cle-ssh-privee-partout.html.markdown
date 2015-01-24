@@ -17,7 +17,7 @@ Si vous utilisez une seule et même clé pour vous connecter à différents serv
 Afin de garantir un minimum de sécurité,
 
 * Une clé est privée à un utilisateur et à une machine
-  * Chacun à sa clé, les clés ne sont pas partagées entre plusieurs utilisateurs
+  * Chacun a sa clé, les clés ne sont pas partagées entre plusieurs utilisateurs
   * Chaque machine d'un même utilisateur a sa propre clé
   * Ne pas stocker sa clé privée sur des machines intermédiaires
 * Toutes les clés sont protégées par une passphrase (même si c'est chiant à taper !)
@@ -25,7 +25,7 @@ Afin de garantir un minimum de sécurité,
 
 ## Comment faire ?
 
-Dans l'exemple qui suit, on va générer une paire de clé qui sera utilisé pour github.com uniquement.
+Dans l'exemple qui suit, on va générer une paire de clés qui sera utilisée pour github.com uniquement.
 
 ### Générer une paire de clé
 
